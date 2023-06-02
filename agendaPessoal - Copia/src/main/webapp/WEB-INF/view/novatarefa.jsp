@@ -7,7 +7,7 @@
 <title>Cadastro de Tarefa</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/tarefa" method="post">
+<form action="<%=request.getContextPath()%>/novatarefa" method="post">
 	<table>
 		<tr>
 			<td>Título</td>

@@ -42,41 +42,10 @@ public class UsuarioDao {
 	        return result;
 	    }
 	 
-	 public int getLoginUsuario(String l, String s) throws ClassNotFoundException {
-	        String SELECT_USERS_SQL = "SELECT id, nome, email from usuarios" +
-	            "  WHERE login = ? AND senha = ?;";
-
-	        int result = 0;
-
-	        Class.forName("com.mysql.jdbc.Driver");
-
-	        try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/employees", "root", "");
-
-	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USERS_SQL)) {
-	        	preparedStatement.setString(1, l);
-	            preparedStatement.setString(2, s);
-	            
-
-	            ResultSet rs = preparedStatement.executeQuery();
-				while (rs.next()) {
-					System.out.println(rs.getString("id"));
-					System.out.println(rs.getString("nome"));
-					System.out.println(rs.getString("email"));
-		
-					result = 1;
-				}
-
-	        } catch (SQLException e) {
-	            // process sql exception
-	            e.printStackTrace();
-	        }
-	        return result;
-	    }
+	
 	 
-	 public Usuario getIdUsuario (String l, String s) throws ClassNotFoundException {
-			String LOGIN_USERS_SQL = "SELECT id, nome, email FROM usuarios "
+	 public Usuario getUsuario (String l, String s) throws ClassNotFoundException {
+			String LOGIN_USERS_SQL = "SELECT  nome, email FROM usuarios "
 					+ "WHERE login = ? AND senha = ?;";
 			Class.forName("com.mysql.jdbc.Driver");
 			
@@ -92,13 +61,11 @@ public class UsuarioDao {
 					
 					ResultSet rs1 = preparedStatement.executeQuery();
 					while (rs1.next()) {
-						System.out.println(rs1.getString("id"));
 						System.out.println(rs1.getString("nome"));
 						System.out.println(rs1.getString("email"));
 						
 						Usuario loginUsuario = new Usuario();
 						loginUsuario.setNome(rs1.getString("nome"));
-						loginUsuario.setId(rs1.getInt("id"));
 						loginUsuario.setEmail(rs1.getString("email"));
 						return loginUsuario;
 					}
@@ -108,6 +75,6 @@ public class UsuarioDao {
 			
 			return null;
 		}
-
+	
 
 }

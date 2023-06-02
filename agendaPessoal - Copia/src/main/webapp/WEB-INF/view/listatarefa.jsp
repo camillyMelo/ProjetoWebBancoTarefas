@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Lista de tarefas</title>
 </head>
 <body>
-<h1>Login</h1>
-  <form action="<%= request.getContextPath() %>/novatarefa" method="post">
+<h1>Lista de tarefas</h1>
+  <form action="<%= request.getContextPath() %>/listatarefa" method="post">
   <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Tarefa" %>
 <table>
@@ -32,7 +32,7 @@
 				${c.descricao}
 			</td>
 			<td>
-				${c.data_criacao}
+				${c.data_cricao}
 			</td>
 			<td>
 				${c.data_conclusao}

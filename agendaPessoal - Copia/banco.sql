@@ -2,12 +2,11 @@ CREATE DATABASE `tarefas` ;
 USE tarefas;
 
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(20) DEFAULT NULL,
+  `login` varchar(20) NOT NULL,
   `nome` varchar(250) DEFAULT NULL,
   `senha` varchar(20) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `tarefa` (
@@ -17,9 +16,9 @@ CREATE TABLE `tarefa` (
   `status` varchar(20) DEFAULT NULL,
   `data_criacao` date DEFAULT NULL,
   `data_conclusao` date DEFAULT NULL,
-  `id_usuario` int NOT NULL,
+  `login_usuario` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE tarefa ADD CONSTRAINT fk_tarefa_id FOREIGN KEY (id_usuario) REFERENCES usuarios (id);
-select * from tarefa;
+ALTER TABLE tarefa ADD CONSTRAINT fk_tarefa_login FOREIGN KEY (login_usuario) REFERENCES usuarios (login);
+select * from usuarios;

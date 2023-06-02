@@ -43,16 +43,15 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("senha");
       
         try {
-			Usuario u = usuarioDao.getIdUsuario(username, password);
+			Usuario u = usuarioDao.getUsuario(username, password);
 			if(u != null) {
 				
 				ServletContext sc = getServletContext();
 				sc.setAttribute("login", username);
 				sc.setAttribute("password", password);
-				sc.setAttribute("usuario", u);
 				
 				try {
-					tarefadao.getTarefa(u.getId());
+					tarefadao.getTarefa(u);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

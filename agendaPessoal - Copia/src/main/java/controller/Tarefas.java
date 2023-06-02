@@ -17,7 +17,7 @@ import model.Usuario;
 /**
  * Servlet implementation class DadosEmpregado
  */
-@WebServlet("/tarefa")
+@WebServlet("/novatarefa")
 public class Tarefas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TarefaDao tdao = new TarefaDao();
@@ -78,12 +78,13 @@ public class Tarefas extends HttpServlet {
 		}
 		
 		try {
-			tdao.getTarefa(u.getId());
+			tdao.getTarefa(u);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("lista_tarefas", tdao.getTarefasUsuario());
+		request.setAttribute("usuario", u);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/listatarefa.jsp");
 		dispatcher.forward(request, response);
 	}

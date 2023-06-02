@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import model.Tarefa;
 import model.Usuario;
 
+
 public class TarefaDao {
 ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 	
@@ -19,8 +20,8 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 	}
 	 public int registerTarefa(Tarefa tarefa) throws ClassNotFoundException {
 	        String INSERT_USERS_SQL = "INSERT INTO tarefa" +
-	            "  ( titulo, descricao, status, data_criacao, data_conclusao) VALUES " +
-	            " ( ?, ?, ?, ?, ?);";
+	            "  ( titulo, descricao, status, data_criacao, data_conclusao, login_usuario) VALUES " +
+	            " ( ?, ?, ?, ?, ?, ?);";
 
 	        int result = 0;
 	       // id = id + 1;
@@ -38,6 +39,7 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 	            preparedStatement.setString(3, tarefa.getStatus());
 	            preparedStatement.setDate(4, (Date) tarefa.getData_cricao());
 	            preparedStatement.setDate(5, (Date) tarefa.getData_conclusao());
+	            preparedStatement.setString(6, tarefa.getUsuario().getLogin());
 	            
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
@@ -50,9 +52,9 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 	        return result;
 	    }
 	 
-	 public Tarefa getTarefa (int idUsuario) throws ClassNotFoundException {
+	 public Tarefa getTarefa ( Usuario usuario) throws ClassNotFoundException {
 			String TAREFA_USERS_SQL = "SELECT id, titulo, descricao, status, data_criacao, data_conclusao FROM usuarios "
-					+ "WHERE id_usuario = ?;";
+					+ "WHERE login_usuario = ?;";
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			try (Connection connection = DriverManager.
@@ -60,7 +62,7 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 					
 					PreparedStatement preparedStatement = connection.prepareStatement(TAREFA_USERS_SQL)){;
 					
-					preparedStatement.setInt(1, idUsuario);
+					preparedStatement.setString(1, usuario.getLogin());
 					
 					System.out.println("Entrei");
 					
@@ -80,6 +82,7 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 						tarefa.setStatus(rs1.getString("status"));
 						tarefa.setData_cricao(rs1.getDate("data_criacao"));
 						tarefa.setData_conclusao(rs1.getDate("data_conclusao"));
+						tarefa.setUsuario(usuario);
 						tarefasUsuario.add(tarefa);
 						return tarefa;
 					}
