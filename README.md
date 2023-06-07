@@ -4,30 +4,33 @@ Uma ideia de projeto para iniciantes que utilize Servlet, JSP e REST seria criar
 
 Abaixo está uma proposta de como essa aplicação poderia ser estruturada:
 
-Criação do banco de dados:
+1. Criação do banco de dados:
 
-Criação de uma tabela "usuarios" com os campos id, login, senha, nome e email.
-Criação de uma tabela "tarefas" com os campos id, titulo, descricao, data_criacao, data_conclusao e status.
-A tabela "tarefas" deverá possuir uma conexão (chave estrangeira) com o id do usuário.
-Criação das páginas JSP:
+  
+  •	 Criação de uma tabela "usuarios" com os campos id, login, senha, nome e email.
+  • Criação de uma tabela "tarefas" com os campos id, titulo, descricao, data_criacao, data_conclusao e status.
+  •	A tabela "tarefas" deverá possuir uma conexão (chave estrangeira) com o id do usuário.
+    
+2. Criação das páginas JSP:
 
-Página de login: formulário de login com usuário e senha.
-Página principal: listagem das tarefas cadastradas e opção de cadastrar novas tarefas.
-Página de cadastro de tarefa: formulário para cadastrar uma nova tarefa.
-Página de edição de tarefa: formulário para editar uma tarefa existente.
-Implementação dos Servlets:
+  •	Página de login: formulário de login com usuário e senha.
+  •	Página principal: listagem das tarefas cadastradas e opção de cadastrar novas tarefas.
+  •	Página de cadastro de tarefa: formulário para cadastrar uma nova tarefa.
+  •	Página de edição de tarefa: formulário para editar uma tarefa existente.
 
-Servlet de login: verifica se o usuário e senha são válidos e redireciona para a página principal.
-Servlet de logout: encerra a sessão do usuário.
-Servlet de listagem de tarefas: busca as tarefas cadastradas no banco de dados e as exibe na página principal.
-Servlet de cadastro de tarefa: insere uma nova tarefa no banco de dados.
-Servlet de edição de tarefa: atualiza uma tarefa existente no banco de dados.
-Servlet de exclusão de tarefa: remove uma tarefa do banco de dados.
-Implementação do serviço REST:
+3. Implementação dos Servlets:
 
-Criação de uma API REST para fornecer acesso aos dados das tarefas cadastradas.
-Implementação dos métodos HTTP GET, POST, PUT e DELETE para buscar, cadastrar, atualizar e excluir tarefas.
-Essa é apenas uma sugestão de projeto para iniciantes utilizando Servlet, JSP e REST. É possível adaptar essa ideia de acordo com as suas necessidades e interesses. O importante é que você pratique os conceitos básicos dessas tecnologias e consiga criar uma aplicação funcional.
+  •	Servlet de login: verifica se o usuário e senha são válidos e redireciona para a página principal.
+  •	Servlet de logout: encerra a sessão do usuário.
+  •	Servlet de listagem de tarefas: busca as tarefas cadastradas no banco de dados e as exibe na página principal.
+  •	Servlet de cadastro de tarefa: insere uma nova tarefa no banco de dados.
+  •	Servlet de edição de tarefa: atualiza uma tarefa existente no banco de dados.
+  •	Servlet de exclusão de tarefa: remove uma tarefa do banco de dados.
+
+4.Implementação do serviço REST:
+
+  •	Criação de uma API REST para fornecer acesso aos dados das tarefas cadastradas.
+  •	Implementação dos métodos HTTP GET, POST, PUT e DELETE para buscar, cadastrar, atualizar e excluir tarefas.
 
 Para completar a proposta de projeto anterior, é possível acrescentar o Maven como ferramenta de gerenciamento de dependências e build do projeto.
 
