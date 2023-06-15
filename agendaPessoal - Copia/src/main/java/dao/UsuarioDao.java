@@ -21,7 +21,7 @@ public class UsuarioDao {
 	        Class.forName("com.mysql.jdbc.Driver");
 
 	        try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/employees", "root", "");
+	            .getConnection("jdbc:mysql://localhost:3306/tarefas", "root", "");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
@@ -45,12 +45,12 @@ public class UsuarioDao {
 	
 	 
 	 public Usuario getUsuario (String l, String s) throws ClassNotFoundException {
-			String LOGIN_USERS_SQL = "SELECT  nome, email FROM usuarios "
+			String LOGIN_USERS_SQL = "SELECT  login, senha, nome, email FROM usuarios "
 					+ "WHERE login = ? AND senha = ?;";
 			Class.forName("com.mysql.jdbc.Driver");
-			
+			Usuario loginUsuario = null;
 			try (Connection connection = DriverManager.
-					getConnection("jdbc:mysql://localhost:3306/employees", "root", "");
+					getConnection("jdbc:mysql://localhost:3306/tarefas", "root", "");
 					
 					PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_USERS_SQL)){;
 					
@@ -60,12 +60,14 @@ public class UsuarioDao {
 					System.out.println("Entrei");
 					
 					ResultSet rs1 = preparedStatement.executeQuery();
-					while (rs1.next()) {
+					if(rs1.next()) {
 						System.out.println(rs1.getString("nome"));
 						System.out.println(rs1.getString("email"));
 						
-						Usuario loginUsuario = new Usuario();
+						loginUsuario = new Usuario();
+						loginUsuario.setLogin(rs1.getString("login"));
 						loginUsuario.setNome(rs1.getString("nome"));
+						loginUsuario.setSenha(rs1.getString("senha"));
 						loginUsuario.setEmail(rs1.getString("email"));
 						return loginUsuario;
 					}
@@ -74,7 +76,37 @@ public class UsuarioDao {
 			}
 			
 			return null;
+		
 		}
 	
+	 public int ifUsuario(String l, String s) throws ClassNotFoundException {
+		 String LOGIN_USERS_SQL = "SELECT  login, senha, nome, email FROM usuarios "
+					+ "WHERE login = ? AND senha = ?;";
 
+	        int result = 0;
+
+	        Class.forName("com.mysql.jdbc.Driver");
+
+	        try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/tarefas", "root", "");
+
+	        		PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_USERS_SQL)){;
+					
+					preparedStatement.setString(1, l);
+					preparedStatement.setString(2, s);
+					
+					System.out.println("Entrei");
+					
+					ResultSet rs = preparedStatement.executeQuery();
+				if(rs.next()) {
+					result = 1;
+				}
+
+	        } catch (SQLException e) {
+	            // process sql exception
+	            e.printStackTrace();
+	        }
+	        return result;
+	    }
+	 
 }

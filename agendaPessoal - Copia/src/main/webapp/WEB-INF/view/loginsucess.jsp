@@ -54,17 +54,24 @@ border-radius:5px;
     text-decoration: none;
 }
 </style>
-<title>Cadastro concluído</title>
+<title>Insert title here</title>
 </head>
 <body>
+
 <div class="page">
-<form action="<%=request.getContextPath() %>/employeesucess" method=get>
+<form action="<%=request.getContextPath() %>/loginsucess" method=get>
 <nav>
-    <div class="menu">
-            <a href = "/agendaPessoal/login">Login</a>
-    </div>
+    <table class="menu">
+           <tr>
+           <td> <a href = "/agendaPessoal/novatarefa">Cadastrar Tarefa</a>
+           </td>
+            <td> <a href = "/agendaPessoal/listatarefa">Lista de Tarefa</a>
+            </td>
+             </tr>
+    </table>
+   
 </nav>
-<main><h1> O cadastro foi realizado com sucesso</h1></main>
+<h1>Login feito com sucesso</h1>
 </form>
 </div>
 

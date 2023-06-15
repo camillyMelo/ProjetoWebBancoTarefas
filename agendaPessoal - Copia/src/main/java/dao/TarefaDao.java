@@ -29,7 +29,7 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 	        Class.forName("com.mysql.jdbc.Driver");
 
 	        try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/employees", "root", "");
+	            .getConnection("jdbc:mysql://localhost:3306/tarefas", "root", "");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
@@ -53,12 +53,12 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 	    }
 	 
 	 public Tarefa getTarefa ( Usuario usuario) throws ClassNotFoundException {
-			String TAREFA_USERS_SQL = "SELECT id, titulo, descricao, status, data_criacao, data_conclusao FROM usuarios "
+			String TAREFA_USERS_SQL = "SELECT id, titulo, descricao, status, data_criacao, data_conclusao FROM tarefa "
 					+ "WHERE login_usuario = ?;";
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			try (Connection connection = DriverManager.
-					getConnection("jdbc:mysql://localhost:3306/employees", "root", "");
+					getConnection("jdbc:mysql://localhost:3306/tarefas", "root", "");
 					
 					PreparedStatement preparedStatement = connection.prepareStatement(TAREFA_USERS_SQL)){;
 					
@@ -92,9 +92,61 @@ ArrayList<Tarefa> tarefasUsuario = new ArrayList<Tarefa>();
 			
 			return null;
 		}
+	 
+	 public Tarefa getTarefaEdit(int id_tarefa) throws ClassNotFoundException {
+			String TAREFA_USERS_SQL = "SELECT * FROM tarefa WHERE id = ?";
+	        
+	        Class.forName("com.mysql.jdbc.Driver");
+	        
+	        Tarefa t = null;
+	        
+	        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", "");
+	        	PreparedStatement preparedStatement = connection.prepareStatement(TAREFA_USERS_SQL)){
+	        	preparedStatement.setInt(1, id_tarefa);
+	        	System.out.println(preparedStatement);
+	        	
+	        	ResultSet rs = preparedStatement.executeQuery();
+	        	if(rs.next()) {
+	        		t = new Tarefa();
+	        		t.setId(rs.getInt("id"));
+	        		t.setTitulo(rs.getString("titulo"));
+	        		t.setDescricao(rs.getString("descricao"));
+	        		t.setData_cricao(rs.getDate("data_criacao"));
+	        		t.setData_conclusao(rs.getDate("data_conclusao"));
+	        		t.setStatus(rs.getString("status"));
+	        	}
+	        }catch(SQLException ex) {
+	        	ex.printStackTrace();
+	        }
+	        
+	        return t;
+		}
+		
+		public void updateTarefa(Tarefa t) throws ClassNotFoundException {
+			 String UPDATE_SQL = "UPDATE tarefa SET titulo = ?, descricao = ?, data_criacao = ?, data_conclusao = ?, status = ? WHERE id = ?";
+		        
+		        Class.forName("com.mysql.jdbc.Driver");
+		        
+		        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", "");
+		        	PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)){
+		        	preparedStatement.setString(1, t.getTitulo());
+		        	preparedStatement.setString(2, t.getDescricao());
+		        	preparedStatement.setDate(3, (Date) t.getData_cricao());
+		        	preparedStatement.setDate(4, (Date) t.getData_conclusao());
+		        	preparedStatement.setString(5, t.getStatus());
+		        	preparedStatement.setInt(6, t.getId());
+		        	System.out.println(preparedStatement);
+		        	
+		        	preparedStatement.executeUpdate();
+		        	
+		        }catch(SQLException e) {
+		        	e.printStackTrace();
+		        }
+		}
+		
 
 	 public void deleteTarefa(int id) throws ClassNotFoundException{
-	        String DELETE_SQL = "DELETE FROM tarefas WHERE id = ?";
+	        String DELETE_SQL = "DELETE FROM tarefa WHERE id = ?";
 	        
 	        Class.forName("com.mysql.jdbc.Driver");
 	        

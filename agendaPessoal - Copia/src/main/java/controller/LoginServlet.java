@@ -43,12 +43,28 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("senha");
       
         try {
-			Usuario u = usuarioDao.getUsuario(username, password);
-			if(u != null) {
+        	if(usuarioDao.ifUsuario(username, password) == 0) {
+        		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login_erro.jsp");
+				dispatcher.forward(request, response);
+        	}else {
+        		log("teste");
+        	}
+        
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+			 
+			
+				try {
+					Usuario u = usuarioDao.getUsuario(username, password);	
+			//if(u != null) {
 				
+				request.getSession().setAttribute("usuario", username);
 				ServletContext sc = getServletContext();
 				sc.setAttribute("login", username);
-				sc.setAttribute("password", password);
+				sc.setAttribute("senha", password);
+				sc.setAttribute("usuario", u);
 				
 				try {
 					tarefadao.getTarefa(u);
@@ -56,20 +72,16 @@ public class LoginServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				 request.setAttribute("username", username);    
-				 request.setAttribute("password", password);
-				
-				Tarefas dispatcher = new Tarefas();
-				dispatcher.doGet(request, response);
-			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login_erro.jsp");
+				//request.setAttribute("lista_tarefas", tarefadao.getTarefasUsuario());
+				//ListaTarefa dispatcher = new ListaTarefa();
+				//dispatcher.doGet(request, response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/loginsucess.jsp");
 				dispatcher.forward(request, response);
+			
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-    
 	}
 
 }

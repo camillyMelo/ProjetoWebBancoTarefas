@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Date;
-import java.sql.SQLException;
 
 public class Tarefa {
 	private int id;
