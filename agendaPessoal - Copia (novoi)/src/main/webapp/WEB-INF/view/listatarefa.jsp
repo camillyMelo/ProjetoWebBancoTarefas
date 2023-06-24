@@ -151,9 +151,14 @@ th {
 <main>
 
 <nav>
-    <div class="menu">
-            <a href = "/agendaPessoal/novatarefa">Nova Tarefa</a>
-    </div>
+<table class="menu">
+           <tr>
+           <td> <a href = "/agendaPessoal/novatarefa">Nova Tarefa</a>
+           </td>
+            <td>
+             <a href="/agendaPessoal/LogoutServlet">Sair</a></td>
+             </tr>
+    </table>
 </nav>
 <h1><br>Lista de tarefas</h1>
 <form role="search" action="<%=request.getContextPath() %>/search" method="post" >
