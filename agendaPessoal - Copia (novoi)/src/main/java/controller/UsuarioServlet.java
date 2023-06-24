@@ -48,23 +48,37 @@ public class UsuarioServlet extends HttpServlet {
         String email = request.getParameter("email");
         
         String crip = PasswordEncryptor.encryptPassword(senha);
-
-        Usuario usuario = new Usuario();
-        usuario.setLogin(login);
-        usuario.setNome(nome);
-        usuario.setSenha(crip);
-        usuario.setEmail(email);
-log(usuario.getLogin());
         try {
-            employeeDao.registerUsuario(usuario);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+			if(employeeDao.ifUsuarioExiste(login) == 1) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login_existe.jsp");
+				dispatcher.forward(request, response);
+			} else {
+			Usuario usuario = new Usuario();
+			usuario.setLogin(login);
+			usuario.setNome(nome);
+			usuario.setSenha(crip);
+			usuario.setEmail(email);
+log(usuario.getLogin());
+			try {
+			    employeeDao.registerUsuario(usuario);
+			} catch (Exception e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/employeesucess.jsp");
-		dispatcher.forward(request, response);
-    }
-	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/employeesucess.jsp");
+			dispatcher.forward(request, response);
+   }
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

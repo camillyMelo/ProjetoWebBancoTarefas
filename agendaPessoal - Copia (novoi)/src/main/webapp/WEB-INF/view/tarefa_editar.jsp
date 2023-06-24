@@ -141,23 +141,23 @@ border-radius:5px;
 		<table>
 		<tr>
 			<td>Título</td>
-			<td><input type="text" name="titulo" value=<%= request.getAttribute("titulo") %> /></td>
+			<td><input type="text" name="titulo" value=<%= request.getAttribute("titulo") %> required/></td>
 		</tr>
 		<tr>
 			<td>Descrição</td>
-			<td><input type="text" name="descricao" value=<%= request.getAttribute("descricao") %>/></td>
+			<td><input type="text" name="descricao" value=<%= request.getAttribute("descricao") %> required/></td>
 		</tr>
 		<tr>
 			<td>Data de Criação</td>
-			<td><input type="date" name="data_criacao" value=<%= request.getAttribute("data_criacao") %> /></td>
+			<td><input type="date" name="data_criacao" value=<%= request.getAttribute("data_criacao") %> required/></td>
 		</tr>
 		<tr>
 			<td>Data de Conclusão</td>
-			<td><input type="date" name="data_conclusao" value=<%= request.getAttribute("data_conclusao") %> /></td>
+			<td><input type="date" name="data_conclusao" value=<%= request.getAttribute("data_conclusao") %>required /></td>
 		</tr>
 		<tr>
 			<td>Status</td>
-			<td><input type="text" name="status" value=<%= request.getAttribute("status") %>  /></td>
+			<td><input type="text" name="status" value=<%= request.getAttribute("status") %> required /></td>
 		</tr>
 	</table>
 		

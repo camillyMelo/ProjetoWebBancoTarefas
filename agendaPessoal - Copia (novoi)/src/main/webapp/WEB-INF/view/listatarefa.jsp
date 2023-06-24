@@ -151,7 +151,7 @@ th {
 <main>
 
 <nav>
-<table class="menu">
+     <table class="menu">
            <tr>
            <td> <a href = "/agendaPessoal/novatarefa">Nova Tarefa</a>
            </td>

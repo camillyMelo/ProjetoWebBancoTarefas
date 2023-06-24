@@ -138,19 +138,19 @@ border-radius:5px;
    <table>
 		<tr>
 			<td>Login</td>
-			<td><input type="text" name="login" /></td>
+			<td><input type="text" name="login" required/></td>
 		</tr>
 		<tr>
 			<td>Senha</td>
-			<td><input type="password" name="senha" /></td>
+			<td><input type="password" name="senha" required /></td>
 		</tr>
 		<tr>
 			<td>Nome</td>
-			<td><input type="text" name="nome" /></td>
+			<td><input type="text" name="nome" required/></td>
 		</tr>
 		<tr>
 			<td>E-mail</td>
-			<td><input type="email" name="email" /></td>
+			<td><input type="email" name="email" required/></td>
 		</tr>
 	</table>
 	<input type="submit" value="Enviar" class="btn" />

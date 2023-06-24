@@ -111,6 +111,34 @@ public class UsuarioDao {
 	        return result;
 	    }
 
+	 public int ifUsuarioExiste(String l) throws ClassNotFoundException {
+		 String LOGIN_USERS_SQL = "SELECT  login, senha, nome, email FROM usuarios "
+					+ "WHERE login = ?;";
+
+	        int result = 0;
+
+
+	        Class.forName("com.mysql.jdbc.Driver");
+
+	        try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/tarefas", "root", "");
+	        		PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_USERS_SQL)){;
+					
+					preparedStatement.setString(1, l);
+					
+					System.out.println("Entrei");
+					
+					ResultSet rs = preparedStatement.executeQuery();
+				if(rs.next()) {
+					result = 1;
+				}
+
+	        } catch (SQLException e) {
+	            // process sql exception
+	            e.printStackTrace();
+	        }
+	        return result;
+	    }
 
 
 	public Usuario listUserId(String login) throws ClassNotFoundException {

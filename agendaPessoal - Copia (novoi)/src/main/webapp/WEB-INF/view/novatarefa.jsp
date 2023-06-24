@@ -128,23 +128,23 @@ border-radius:5px;
 	<table>
 		<tr>
 			<td>Título</td>
-			<td><input type="text" name="titulo" /></td>
+			<td><input type="text" name="titulo" required/></td>
 		</tr>
 		<tr>
 			<td>Descrição</td>
-			<td><input type="text" name="descricao" /></td>
+			<td><input type="text" name="descricao" required/></td>
 		</tr>
 		<tr>
 			<td>Data de Criação</td>
-			<td><input type="date" name="data_criacao" /></td>
+			<td><input type="date" name="data_criacao" required /></td>
 		</tr>
 		<tr>
 			<td>Data de Conclusão</td>
-			<td><input type="date" name="data_conclusao" /></td>
+			<td><input type="date" name="data_conclusao" required/></td>
 		</tr>
 		<tr>
 			<td>Status</td>
-			<td><input type="text" name="status" /></td>
+			<td><input type="text" name="status" required/></td>
 		</tr>
 	</table>
 	<input type="submit" value="Enviar" />
